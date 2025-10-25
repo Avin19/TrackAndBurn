@@ -125,7 +125,8 @@ public class GraphNode : MonoBehaviour
 /// </summary>
 public enum NodeType
 {
-    Normal,     // Default grid node
+    Normal, // Default grid node 
+    AI,     // AI 
     Device,     // Can be burned
     Decoy,      // Fake node placed by player
     Battery,    // Restores player energy

@@ -4,44 +4,37 @@ using UnityEngine;
 public class AIConnectionVisualizer : MonoBehaviour
 {
     private LineRenderer line;
-    public float fadeDuration = 2.5f;
-    private float lifeTimer = 0f;
-    private Color baseColor = Color.cyan;
+    private Color baseColor;
+    private float lifetime;
 
     void Awake()
     {
         line = GetComponent<LineRenderer>();
+        line.useWorldSpace = true;
+        line.material = new Material(Shader.Find("Sprites/Default"));
         line.startWidth = 0.06f;
         line.endWidth = 0.06f;
-        line.material = new Material(Shader.Find("Sprites/Default"));
-        line.startColor = baseColor;
-        line.endColor = baseColor;
     }
 
-    public void Initialize(Vector3 from, Vector3 to, Color color, float lifetime)
+    public void Initialize(Vector3 from, Vector3 to, Color color, float duration)
     {
-        if (line == null) line = GetComponent<LineRenderer>();
         line.positionCount = 2;
-        line.SetPosition(0, from);
-        line.SetPosition(1, to);
+        // Slight Z offset so it’s always visible above grid
+        line.SetPosition(0, from + Vector3.back * 0.1f);
+        line.SetPosition(1, to + Vector3.back * 0.1f);
+
         baseColor = color;
-        fadeDuration = lifetime;
-        lifeTimer = lifetime;
         line.startColor = color;
         line.endColor = color;
+        lifetime = duration;
     }
 
     void Update()
     {
-        if (fadeDuration > 0)
+        if (lifetime > 0)
         {
-            lifeTimer -= Time.deltaTime;
-            float t = Mathf.Clamp01(lifeTimer / fadeDuration);
-            Color c = baseColor * new Color(1, 1, 1, t);
-            line.startColor = c;
-            line.endColor = c;
-
-            if (lifeTimer <= 0)
+            lifetime -= Time.deltaTime;
+            if (lifetime <= 0)
                 Destroy(gameObject);
         }
     }

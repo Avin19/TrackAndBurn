@@ -38,7 +38,7 @@ public static class GraphAStar
                     neighbor.parent = current;
                     neighbor.gCost = tentativeG;
                     neighbor.fCost = tentativeG + neighbor.DistanceTo(goal);
-                    open.Add(neighbor);
+                    // open.Add(neighbor);
                 }
                 else if (tentativeG < neighbor.gCost)
                 {
@@ -48,17 +48,18 @@ public static class GraphAStar
                 }
             }
         }
+
         return null;
     }
 
     private static List<AINode> ReconstructPath(AINode goal)
     {
         var path = new List<AINode>();
-        AINode cur = goal;
-        while (cur != null)
+        AINode current = goal;
+        while (current != null)
         {
-            path.Add(cur);
-            cur = cur.parent;
+            path.Add(current);
+            //  current = current.parent;
         }
         path.Reverse();
         return path;

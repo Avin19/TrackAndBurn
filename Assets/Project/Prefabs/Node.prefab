@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1763218676743370595}
   - component: {fileID: 8921441268099029226}
+  - component: {fileID: 265240619752451489}
   m_Layer: 0
   m_Name: Node
   m_TagString: Untagged
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.85, g: 0.85, b: 0.85, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -84,3 +85,40 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &265240619752451489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014358897260621995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b592f15cbc696f149874e22353646ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeID: 
+  nodeType: 0
+  traversalCost: 1
+  signalStrength: 10
+  isActive: 1
+  neighbors: []
+  gCost: 0
+  fCost: 0
+  parent: {fileID: 0}
+  nodeColor: {r: 0, g: 1, b: 1, a: 1}
+  gizmoRadius: 0.15
+  isActive: 1
+  traversalCost: 1
+  neighbors: []
+  signalStrength: 0
+  maxSignal: 100
+  decayRate: 5
+  minSignalVisible: 0.1
+  state: 0
+  baseColor: {r: 1, g: 1, b: 1, a: 1}
+  glowIntensity: 1.5
+  showSignalPulse: 1
+  gCost: 0
+  fCost: 0
+  parent: {fileID: 0}

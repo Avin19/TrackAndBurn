@@ -20,11 +20,14 @@ public class GridMapGenerator : MonoBehaviour
     [Header("Special Node Counts")]
     public int batteryCount = 3;
     public bool showDebugLines = true;
+    [Header("Prefabs for Runtime Spawning")]
+    public GameObject aiPrefab;
+    public GameObject playerPrefab;
+
 
     private List<AINode> nodes = new List<AINode>();
 
 
-    [ContextMenu("Generate Full Dynamic Grid")]
     public void GenerateGrid()
     {
         if (nodePrefab == null)
@@ -108,7 +111,6 @@ public class GridMapGenerator : MonoBehaviour
     {
         if (nodes.Count < 4) return;
 
-        // Sort by position for simple quadrant logic
         float midX = nodes.Average(n => n.transform.position.x);
         float midY = nodes.Average(n => n.transform.position.y);
 
@@ -118,11 +120,15 @@ public class GridMapGenerator : MonoBehaviour
         // --- Player node ---
         AINode playerNode = bottomLeftNodes[Random.Range(0, bottomLeftNodes.Count)];
         playerNode.state = NodeState.PlayerTrace;
+        playerNode.name = "Player";
+        playerNode.gameObject.tag = "Player";
         playerNode.EmitSignal(50f, NodeState.PlayerTrace);
 
         // --- AI node ---
         AINode aiNode = topRightNodes[Random.Range(0, topRightNodes.Count)];
-        aiNode.state = NodeState.Decoy; // just to visualize differently
+        aiNode.state = NodeState.AI;
+        aiNode.name = "AIController";
+        GameObject ai = Instantiate(aiPrefab, aiNode.transform.position, Quaternion.identity);
         aiNode.EmitSignal(30f, NodeState.Decoy);
 
         // --- Exit node ---
@@ -139,10 +145,12 @@ public class GridMapGenerator : MonoBehaviour
             available.RemoveAt(r);
         }
 
-        Debug.Log($"Player at {playerNode.name}, AI at {aiNode.name}, Exit: {exitNode.name}, Batteries: {batteryCount}");
+        Debug.Log($"Player at {playerNode.name}, AI at {aiNode.name}, Exit: {exitNode.name}");
+
+        // 🧩 Spawn prefabs
+
     }
 
-    [ContextMenu("Clear Grid")]
     public void ClearExisting()
     {
         var children = new List<GameObject>();

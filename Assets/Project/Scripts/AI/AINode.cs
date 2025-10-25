@@ -8,13 +8,9 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class AINode : GraphNode
 {
-    [Header("Node Properties")]
-    public bool isActive = true;               // whether node is usable
-    public float traversalCost = 1f;           // used in A* pathfinding
-    public List<AINode> neighbors = new List<AINode>();
+
 
     [Header("Signal Properties")]
-    [Range(0f, 100f)] public float signalStrength = 0f;   // how strong the trace signal is
     public float maxSignal = 100f;
     public float decayRate = 5f;               // how fast signal fades per second
     public float minSignalVisible = 0.1f;
@@ -29,9 +25,7 @@ public class AINode : GraphNode
     private float pulseTime;
 
     // A* fields
-    [HideInInspector] public float gCost;
-    [HideInInspector] public float fCost;
-    [HideInInspector] public AINode parent;
+
 
     void Awake()
     {
@@ -158,6 +152,7 @@ public enum NodeState
 {
     Idle,
     PlayerTrace,
+    AI,
     Decoy,
     Battery,
     Exit,
