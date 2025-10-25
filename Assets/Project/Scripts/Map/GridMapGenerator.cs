@@ -78,7 +78,6 @@ public class GridMapGenerator : MonoBehaviour
 
         ConnectNodes(Mathf.Max(spacingX, spacingY));
         AssignSpecialNodes();
-        Debug.Log($"✅ Generated grid {width}x{height} ({nodes.Count} nodes).");
     }
 
     private void ConnectNodes(float spacing)
