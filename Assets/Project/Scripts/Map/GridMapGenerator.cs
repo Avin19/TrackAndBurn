@@ -23,6 +23,7 @@ public class GridMapGenerator : MonoBehaviour
 
     private List<AINode> nodes = new List<AINode>();
 
+
     [ContextMenu("Generate Full Dynamic Grid")]
     public void GenerateGrid()
     {
@@ -161,25 +162,6 @@ public class GridMapGenerator : MonoBehaviour
 #endif
         }
         nodes.Clear();
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (!showDebugLines || nodes == null || nodes.Count == 0) return;
-
-        foreach (var n in nodes)
-        {
-            if (n == null) continue;
-            switch (n.state)
-            {
-                case NodeState.PlayerTrace: Gizmos.color = Color.cyan; break;
-                case NodeState.Decoy: Gizmos.color = Color.red; break;
-                case NodeState.Battery: Gizmos.color = Color.green; break;
-                case NodeState.Exit: Gizmos.color = Color.magenta; break;
-                default: Gizmos.color = Color.gray; break;
-            }
-            Gizmos.DrawSphere(n.transform.position, 0.1f);
-        }
     }
 
     private void Start()
